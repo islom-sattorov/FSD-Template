@@ -3,13 +3,13 @@ FROM node:20.11.1-alpine AS builder
 
 WORKDIR /website
 
-COPY package.json package-lock.json ./
+COPY package.json yarn.json ./
 
-RUN npm install
+RUN yarn
 
 COPY . .
 
-RUN npm run build
+RUN yarn run build
 
 # Stage 2: Runtime Stage
 FROM nginx:1.21.1-alpine AS runtime
